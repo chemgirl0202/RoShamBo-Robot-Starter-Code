@@ -1,0 +1,66 @@
+input.onButtonPressed(Button.A, function () {
+    Score_A += 1
+    basic.showNumber(Score_A)
+    basic.showString("of")
+    _of_Games += 1
+    basic.showNumber(_of_Games)
+})
+input.onButtonPressed(Button.B, function () {
+    Score_B += 1
+    basic.showNumber(Score_B)
+    basic.showString("of")
+    _of_Games += 1
+    basic.showNumber(_of_Games)
+})
+input.onGesture(Gesture.Shake, function () {
+    Hand = randint(0, 2)
+    if (Hand == RockIndex) {
+        RockPic.showImage(0)
+    }
+    if (Hand == PaperIndex) {
+        PaperPic.showImage(0)
+    }
+    if (Hand == SheersIndex) {
+        SheersPic.showImage(0)
+    }
+})
+input.onLogoEvent(TouchButtonEvent.Pressed, function () {
+    _of_Games = 0
+    Score_A = 0
+    Score_B = 0
+    basic.clearScreen()
+})
+let Hand = 0
+let Score_B = 0
+let _of_Games = 0
+let Score_A = 0
+let SheersPic: Image = null
+let PaperPic: Image = null
+let RockPic: Image = null
+let SheersIndex = 0
+let PaperIndex = 0
+let RockIndex = 0
+RockIndex = 0
+PaperIndex = 1
+SheersIndex = 2
+RockPic = images.createImage(`
+    . # # # .
+    # # # # #
+    # # # # #
+    # # # # #
+    . # # # .
+    `)
+PaperPic = images.createImage(`
+    # # # # #
+    # # # # #
+    # # # # #
+    # # # # #
+    # # # # #
+    `)
+SheersPic = images.createImage(`
+    # . . . #
+    . # . # .
+    . . # . .
+    # # . # #
+    # # . # #
+    `)
