@@ -1,0 +1,67 @@
+// myTeamRobot.js (Example for good solution)
+class MyTeamRobot extends Robot {
+    constructor() {
+        super();
+        // This object will count how many times the opponent plays each move
+        this.opponentMoveCounts = {
+            'rock': 0,
+            'paper': 0,
+            'scissors': 0
+        };
+        this.myLastMove = null;
+        this.opponentLastMove = null;
+    }
+
+    // This function decides what move your robot will play
+    chooseMove() {
+        // If there aren't enough turns, play randomly
+        if (this.opponentMoveCounts['rock'] + this.opponentMoveCounts['paper'] + this.opponentMoveCounts['scissors'] < 5) {
+            return this.moves[Math.floor(Math.random() * this.moves.length)];
+        }
+
+        // Find which move the opponent plays most often
+        const mostFrequentOpponentMove = this._getMostFrequentOpponentMove();
+
+        // Play the move that beats the opponent's most frequent move
+        return this.winConditions[mostFrequentOpponentMove];
+    }
+
+    // This function is called after each round, telling your robot what happened
+    receiveOpponentMove(myMove, opponentMove) {
+        // Update our counts for the opponent's moves
+        this.opponentMoveCounts[opponentMove]++;
+        this.myLastMove = myMove;
+        this.opponentLastMove = opponentMove;
+    }
+
+    // This function is called when a new game starts
+    resetGame() {
+        // Clear all our counts and history for a fresh start
+        this.opponentMoveCounts = {
+            'rock': 0,
+            'paper': 0,
+            'scissors': 0
+        };
+        this.myLastMove = null;
+        this.opponentLastMove = null;
+    }
+
+    // --- Helper Functions ---
+
+    // Finds the move the opponent has played most often
+    _getMostFrequentOpponentMove() {
+        let mostFrequentMove = null;
+        let maxCount = -1;
+
+        for (const move in this.opponentMoveCounts) {
+            const count = this.opponentMoveCounts[move];
+            if (count > maxCount) {
+                maxCount = count;
+                mostFrequentMove = move;
+            }
+        }
+        return mostFrequentMove;
+    }
+}
+
+module.exports = MyTeamRobot;

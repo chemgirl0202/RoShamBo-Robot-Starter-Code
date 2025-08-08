@@ -1,0 +1,22 @@
+class MyTeamRobot extends Robot {
+    constructor() {
+        super(); // Call the constructor of the parent Robot class
+        // Add your robot's properties here (e.g., to store history)
+    }
+
+    chooseMove() {
+        // Your robot's logic to decide 'rock', 'paper', or 'scissors'
+        return 'rock'; // Start with 'rock'
+    }
+
+    receiveOpponentMove(myMove, opponentMove) {
+        // This function is called after each round.
+        // Use it to remember what happened (e.g., store opponentMove)
+    }
+
+    resetGame() {
+        // This function is called at the start of a new game.
+        // Reset any history your robot is storing.
+    }
+}
+module.exports = MyTeamRobot; // Important: This makes your robot available to the game client
